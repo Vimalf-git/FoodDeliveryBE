@@ -9,7 +9,7 @@ const userSchema=new mongoose.Schema({
     token:{type:String},
     profileImgUrl:{type:String},
     public_id:String,
-    admin:String
+    admin:Boolean
 },{
     versionKey:false
 })

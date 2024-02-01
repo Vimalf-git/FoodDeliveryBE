@@ -12,6 +12,7 @@ const schema=new mongoose.Schema({
     public_id:String
 },{
     versionKey:false
+
 })
-const FoodModel=mongoose.model('foodmodel',schema);
-export default FoodModel
+const CartModel=mongoose.model('cart',schema);
+export default CartModel
