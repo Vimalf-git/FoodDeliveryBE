@@ -16,6 +16,6 @@ route.post('/addfood',upload.single('file'),foodAdd.foodAdd);
 route.get('/getfooddata',Auth.validate,foodAdd.getFoodDetails);
 route.delete('/deletefood/:id',foodAdd.deleteFoodDetail)
 route.get('/editData/:id',foodAdd.getEditData)
-route.put('/updatedata',upload.single('updatefile'),foodAdd.UpdateFoodMenu)
+route.put('/updatedata',upload.single('file'),foodAdd.UpdateFoodMenu)
 route.post('/paymenttoken',foodAdd.paymentToken);
 export default route

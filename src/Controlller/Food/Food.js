@@ -29,7 +29,7 @@ const foodAdd = async (req, res) => {
             await newImage.save()
         } else {
             const newImage = new FoodModel({
-                mail: req.body.mail,
+                mail: req.body.email,
                 foodName: req.body.foodName,
                 price: req.body.price,
                 foodDesc: req.body.foodDesc,
@@ -40,7 +40,7 @@ const foodAdd = async (req, res) => {
         }
         res.status(200).send({ message: 'post saved successfully' })
     } catch (error) {
-        res.status(500).send({ message: 'post failed..!' })
+        res.status(500).send({ message: error.message })
 
     }
 }
@@ -95,9 +95,9 @@ const UpdateFoodMenu = async (req, res) => {
     try {
         let resDb = await FoodModel.findOne({ _id: req.body.id })
         if (resDb) {
-            if (req.file) {
+            if (req.file ) {
+                if(req.size<10485760){
                 const result = await cloudnary.v2.uploader.upload(req.file.path)
-
                 resDb.mail = req.body.email,
                     resDb.foodName = req.body.foodName,
                     resDb.price = req.body.price,
@@ -106,9 +106,11 @@ const UpdateFoodMenu = async (req, res) => {
                     resDb.quantity = req.body.quantity,
                     resDb.imageUrl = result.url,
                     resDb.public_id = result.public_id
-                await resDb.save()
+                await resDb.save();
+                }else{
+                    res.status(200).send({message:'your size to large '});
+                }
             } else {
-
                 // const newImage = new FoodModel({
                 //     mail: req.body.mail,
                 //     foodName: req.body.foodName,
@@ -123,15 +125,12 @@ const UpdateFoodMenu = async (req, res) => {
                     resDb.foodDesc = req.body.foodDesc,
                     resDb.category = req.body.category,
                     resDb.quantity = req.body.quantity,
-                    // resDb.imageUrl= req.body,
-                    // resDb.public_id= result.public_id
                     await resDb.save()
             }
             res.status(200).send({ message: 'post saved successfully' })
         }
     } catch (error) {
-        res.status(500).send({ message: 'post failed..!' })
-
+        res.status(500).send({ message:error.message })
     }
 }
 const paymentToken = async (req, res) => {
