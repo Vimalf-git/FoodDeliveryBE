@@ -1,6 +1,7 @@
 import express from 'express';
 import foodAdd from '../../Controlller/Food/Food.js'
 import multer from "multer";
+import Cart from '../../Controlller/Cart/Cart.js';
 
 const storage=multer.diskStorage({
     
@@ -16,4 +17,5 @@ route.get('/getfooddata',foodAdd.getFoodDetails);
 route.delete('/deletefood/:id',foodAdd.deleteFoodDetail)
 route.get('/editData/:id',foodAdd.getEditData)
 route.put('/updatedata',upload.single('updatefile'),foodAdd.UpdateFoodMenu)
+route.post('/paymenttoken',foodAdd.paymentToken);
 export default route

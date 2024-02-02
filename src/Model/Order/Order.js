@@ -1,5 +1,4 @@
 import mongoose from "../index.js";
-
 const schema=new mongoose.Schema({
     mail:String,
     foodName:{type:String,require:true},
@@ -10,10 +9,9 @@ const schema=new mongoose.Schema({
     veg:Boolean,
     imageUrl: { type: String },
     public_id:String,
-    cartBy:String
+    orderBy:String
 },{
     versionKey:false
-
 })
-const CartModel=mongoose.model('cart',schema);
-export default CartModel
+const OrderModel=mongoose.model('order',schema);
+export default OrderModel

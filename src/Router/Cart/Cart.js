@@ -12,4 +12,5 @@ const route=express()
 route.post('/savcart',Cart.AddCart);
 route.get('/getcartdata/:email',Cart.getCartData);
 route.delete('/deletecart/:id',Cart.deleteCartData)
+// route.delete('/deleteOrderedCart',Cart.deleteallcartData)
 export default route
