@@ -5,7 +5,6 @@ import cloudnary from 'cloudinary'
 
 
 const create = async (req, res) => {
-    console.log('enter');
     try {
         let data = await userModel.findOne({ email: req.body.email })
         if (!data) {
@@ -25,10 +24,6 @@ const create = async (req, res) => {
 
 const updateUserInfo = async (req, res) => {
     try {
-
-        // console.log('enter');
-        // console.log(req.file);
-        // console.log(req.body);
         cloudnary.config({
             cloud_name: "dfjc0pkpp",
             api_key: "588969669952431",
@@ -49,7 +44,6 @@ const updateUserInfo = async (req, res) => {
                 UserData.username = req.body.username ? req.body.username : UserData.username
                 UserData.profileImgUrl = result.url;
                 UserData.public_id = result.public_id;
-                // console.log(UserData);
                 await UserData.save()
             }
             else {
@@ -80,7 +74,6 @@ const getuser = async (req, res) => {
 const getUserList = async (req, res) => {
     try {
         let dbRes = await userModel.find();
-        // console.log(dbRes);
         if (dbRes) {
             let userList = dbRes.map((e) => {return{
                 name:e.username,

@@ -49,25 +49,19 @@ try {
 
 }
 }
-const deleteallcartData=async(req,res,next)=>{
-    try {
-        const{addToCartData}=req.body;
-        console.log(
-            'delete'
-        );
-        console.log(addToCartData);
-        await addToCartData.forEach((e)=>{
-          let dbres=  CartModel.deleteOne({_id:e._id});
-          console.log(dbres);
-        })
-        if(true){
-            next()
-        }
-        // let dbRes=await CartModel.findOne({_id:req.params.id});
-        res.status(200).send({message:'deleted succeessfully'})
-    } catch (error) {
-        res.status(500).send({message:error.message})
+// const deleteallcartData=async(req,res,next)=>{
+//     try {
+//         const{addToCartData}=req.body;
+//         await addToCartData.forEach((e)=>{
+//           let dbres=  CartModel.deleteOne({_id:e._id});
+//         })
+//         if(true){
+//             next()
+//         }
+//         res.status(200).send({message:'deleted succeessfully'})
+//     } catch (error) {
+//         res.status(500).send({message:error.message})
 
-    }
-}
-export default{AddCart,getCartData,deleteCartData,deleteallcartData}
+//     }
+// }
+export default{AddCart,getCartData,deleteCartData}

@@ -16,8 +16,6 @@ const foodAdd = async (req, res) => {
     try {
         if (req.file) {
             const result = await cloudnary.v2.uploader.upload(req.file.path)
-            // console.log('enter');
-            // console.log(result);
             const newImage = new FoodModel({
                 mail: req.body.email,
                 foodName: req.body.foodName,
@@ -75,10 +73,7 @@ const deleteFoodDetail = async (req, res) => {
 }
 const getEditData = async (req, res) => {
     try {
-        // console.log('gfhj');
-        // console.log(req.params.id);
         let resData = await FoodModel.findOne({ _id: req.params.id });
-        // console.log(resData);
         if (resData) {
             res.status(200).send({ message: 'data fetched', editData: resData })
         }
@@ -92,8 +87,6 @@ const getEditData = async (req, res) => {
 }
 
 const UpdateFoodMenu = async (req, res) => {
-    console.log('update');
-    console.log(req.body);
     cloudnary.config({
         cloud_name: "dfjc0pkpp",
         api_key: "588969669952431",
@@ -101,7 +94,6 @@ const UpdateFoodMenu = async (req, res) => {
     })
     try {
         let resDb = await FoodModel.findOne({ _id: req.body.id })
-        console.log(resDb);
         if (resDb) {
             if (req.file) {
                 const result = await cloudnary.v2.uploader.upload(req.file.path)
@@ -143,8 +135,6 @@ const UpdateFoodMenu = async (req, res) => {
     }
 }
 const paymentToken = async (req, res) => {
-    console.log('enter');
-    console.log(req.body);
     try {
         const { token, addToCartData,totalbillAmt } = req.body
         let removeIds=[];
@@ -170,12 +160,6 @@ const paymentToken = async (req, res) => {
         orderData.save();
         })
        
-
-        // await addToCartData.forEach((e)=>{
-        //     console.log(e._id);
-        // })
-
-// console.log(dbRes);
 res.status(200).send({message:'transaction complited'})
 
         // const transaction = v4()
